@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/altimar.github.io/easy_schedule/static/css/main.14b6479d.chunk.css",
-    "main.js": "/altimar.github.io/easy_schedule/static/js/main.fa546e0a.chunk.js",
-    "main.js.map": "/altimar.github.io/easy_schedule/static/js/main.fa546e0a.chunk.js.map",
-    "runtime-main.js": "/altimar.github.io/easy_schedule/static/js/runtime-main.039e1b7a.js",
-    "runtime-main.js.map": "/altimar.github.io/easy_schedule/static/js/runtime-main.039e1b7a.js.map",
-    "static/js/2.3c164b9d.chunk.js": "/altimar.github.io/easy_schedule/static/js/2.3c164b9d.chunk.js",
-    "static/js/2.3c164b9d.chunk.js.map": "/altimar.github.io/easy_schedule/static/js/2.3c164b9d.chunk.js.map",
-    "static/js/3.ccda5af4.chunk.js": "/altimar.github.io/easy_schedule/static/js/3.ccda5af4.chunk.js",
-    "static/js/3.ccda5af4.chunk.js.map": "/altimar.github.io/easy_schedule/static/js/3.ccda5af4.chunk.js.map",
-    "index.html": "/altimar.github.io/easy_schedule/index.html",
-    "static/css/main.14b6479d.chunk.css.map": "/altimar.github.io/easy_schedule/static/css/main.14b6479d.chunk.css.map",
-    "static/js/2.3c164b9d.chunk.js.LICENSE.txt": "/altimar.github.io/easy_schedule/static/js/2.3c164b9d.chunk.js.LICENSE.txt"
+    "main.css": "/easy_schedule/static/css/main.14b6479d.chunk.css",
+    "main.js": "/easy_schedule/static/js/main.fa546e0a.chunk.js",
+    "main.js.map": "/easy_schedule/static/js/main.fa546e0a.chunk.js.map",
+    "runtime-main.js": "/easy_schedule/static/js/runtime-main.51551c20.js",
+    "runtime-main.js.map": "/easy_schedule/static/js/runtime-main.51551c20.js.map",
+    "static/js/2.3c164b9d.chunk.js": "/easy_schedule/static/js/2.3c164b9d.chunk.js",
+    "static/js/2.3c164b9d.chunk.js.map": "/easy_schedule/static/js/2.3c164b9d.chunk.js.map",
+    "static/js/3.ccda5af4.chunk.js": "/easy_schedule/static/js/3.ccda5af4.chunk.js",
+    "static/js/3.ccda5af4.chunk.js.map": "/easy_schedule/static/js/3.ccda5af4.chunk.js.map",
+    "index.html": "/easy_schedule/index.html",
+    "static/css/main.14b6479d.chunk.css.map": "/easy_schedule/static/css/main.14b6479d.chunk.css.map",
+    "static/js/2.3c164b9d.chunk.js.LICENSE.txt": "/easy_schedule/static/js/2.3c164b9d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.039e1b7a.js",
+    "static/js/runtime-main.51551c20.js",
     "static/js/2.3c164b9d.chunk.js",
     "static/css/main.14b6479d.chunk.css",
     "static/js/main.fa546e0a.chunk.js"
