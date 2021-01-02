@@ -2,12 +2,12 @@ import React, {Component} from 'react';
 import './Entry.css';
 import {Participant} from './Participant';
 
-export type EntryProps = {
+type EntryProps = {
   title: string,
   participants?: string[],
 }
 
-export class Entry extends Component<EntryProps> {
+export default class Entry extends Component<EntryProps> {
   constructor(props: EntryProps) {
     super(props)
   }
