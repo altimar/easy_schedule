@@ -1,22 +1,20 @@
 {
   "files": {
     "main.css": "/easy_schedule/static/css/main.049acf78.chunk.css",
-    "main.js": "/easy_schedule/static/js/main.6ad9c298.chunk.js",
-    "main.js.map": "/easy_schedule/static/js/main.6ad9c298.chunk.js.map",
-    "runtime-main.js": "/easy_schedule/static/js/runtime-main.fba07ae4.js",
-    "runtime-main.js.map": "/easy_schedule/static/js/runtime-main.fba07ae4.js.map",
-    "static/js/2.61fcba11.chunk.js": "/easy_schedule/static/js/2.61fcba11.chunk.js",
-    "static/js/2.61fcba11.chunk.js.map": "/easy_schedule/static/js/2.61fcba11.chunk.js.map",
-    "static/js/3.2d0644d0.chunk.js": "/easy_schedule/static/js/3.2d0644d0.chunk.js",
-    "static/js/3.2d0644d0.chunk.js.map": "/easy_schedule/static/js/3.2d0644d0.chunk.js.map",
+    "main.js": "/easy_schedule/static/js/main.ef1f6ffb.chunk.js",
+    "main.js.map": "/easy_schedule/static/js/main.ef1f6ffb.chunk.js.map",
+    "runtime-main.js": "/easy_schedule/static/js/runtime-main.8160c86f.js",
+    "runtime-main.js.map": "/easy_schedule/static/js/runtime-main.8160c86f.js.map",
+    "static/js/2.b7fdc1a6.chunk.js": "/easy_schedule/static/js/2.b7fdc1a6.chunk.js",
+    "static/js/2.b7fdc1a6.chunk.js.map": "/easy_schedule/static/js/2.b7fdc1a6.chunk.js.map",
     "index.html": "/easy_schedule/index.html",
     "static/css/main.049acf78.chunk.css.map": "/easy_schedule/static/css/main.049acf78.chunk.css.map",
-    "static/js/2.61fcba11.chunk.js.LICENSE.txt": "/easy_schedule/static/js/2.61fcba11.chunk.js.LICENSE.txt"
+    "static/js/2.b7fdc1a6.chunk.js.LICENSE.txt": "/easy_schedule/static/js/2.b7fdc1a6.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.fba07ae4.js",
-    "static/js/2.61fcba11.chunk.js",
+    "static/js/runtime-main.8160c86f.js",
+    "static/js/2.b7fdc1a6.chunk.js",
     "static/css/main.049acf78.chunk.css",
-    "static/js/main.6ad9c298.chunk.js"
+    "static/js/main.ef1f6ffb.chunk.js"
   ]
 }
