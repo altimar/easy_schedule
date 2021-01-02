@@ -4,6 +4,7 @@
   padding: 10px;
   width: 100%;
   box-sizing: border-box;
+  cursor: pointer;
 }
 
 .Entry-title {
@@ -19,6 +20,6 @@
   box-sizing: border-box;
 }
 
-.Entry-participant-list .Participant {
+.Entry-participant-list * {
   margin: 0 5px 5px 0;
 }

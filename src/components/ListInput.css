@@ -1,0 +1,19 @@
+.ListInput {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 5px;
+  box-sizing: border-box;
+  border: 1px black solid;
+}
+
+.ListInput .Label {
+  margin: 0 5px 5px 0;
+}
+
+.ListInput input {
+  min-width: 25%;
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+}
