@@ -1,22 +1,19 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './EntryList.css';
-import {Entry, EntryProps} from './Entry';
+import Entry from './Entry'
+import { EntryType } from '../store/types'
 
-export type EntryListProps = {
-  entries: EntryProps[]
+type Props = {
+  entries: EntryType[]
 }
 
-export class EntryList extends Component<EntryListProps> {
-  constructor(props: EntryListProps) {
-    super(props)
-  }
-
+export default class EntryList extends Component<Props> {
   render() {
     return (
       <div className="EntryList">
         {
           this.props.entries && this.props.entries.map(entry => {
-            return <Entry title={entry.title} key={"entry_"+entry.title} participants={entry.participants}/>;
+            return <Entry title={entry.title} key={"entry_" + entry.title} participants={entry.participants} />;
           })
         }
       </div>
