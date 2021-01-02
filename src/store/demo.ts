@@ -341,7 +341,6 @@ function getRandomScheduleEntry(id: number, title: string, min_participant: numb
     participants: [],
   };
   for (let j = 0; j < Math.floor(Math.random() * (max_participant - min_participant + 1)) + min_participant; j++) {
-    let first_names = j % 2 === 0 ? female_first_names : male_first_names;
     entry.participants.push(j % 2 === 0 ? getFemaleName() : getMaleName());
   }
   return entry;
