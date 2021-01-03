@@ -5,6 +5,7 @@
   width: 100%;
   box-sizing: border-box;
   cursor: pointer;
+  background: #fff;
 }
 
 .Entry-title {

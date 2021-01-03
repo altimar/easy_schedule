@@ -4,7 +4,7 @@ import EntryList from './components/EntryList';
 import EntryModal from './components/EntryModal';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState, EntryListType, EntryType } from './store/types'
-import { addEntryAction, updateEntryAction, deleteEntryAction } from './store/actions'
+import { addEntryAction, updateEntryAction, deleteEntryAction, rearrangeEntryAction } from './store/actions'
 import Button from './components/Button'
 
 const mapState = (state: RootState) => ({
@@ -15,6 +15,7 @@ const mapDispatch = {
   addEntry: addEntryAction,
   updateEntry: updateEntryAction,
   deleteEntry: deleteEntryAction,
+  rearrangeEntry: rearrangeEntryAction,
 }
 
 const connector = connect(mapState, mapDispatch)
@@ -41,7 +42,7 @@ class App extends Component<Props, IState> {
     super(props);
 
     this.state = {
-      is_modal: true,
+      is_modal: false,
       schedule: { ...this.props.schedule },
       edited_entry: getEmptyEntry()
     };
@@ -98,7 +99,11 @@ class App extends Component<Props, IState> {
           <h1>Easy Schedule</h1>
         </header>
         <Button type="ok" size="big" onClick={this.onAddButtonClick}>Add entry</Button>
-        <EntryList entries={this.state.schedule.entries} onSelect={this.onEntrySelect} />
+        <EntryList
+        entries={this.state.schedule.entries}
+        onSelect={this.onEntrySelect}
+        onRearrange={this.props.rearrangeEntry}
+        />
         {
           this.state.is_modal &&
           <EntryModal key={this.state.edited_entry.id}
