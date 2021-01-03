@@ -1,6 +1,7 @@
 export const ADD_ENTRY = 'ADD_ENTRY';
 export const UPDATE_ENTRY = 'UPDATE_ENTRY';
 export const DELETE_ENTRY = 'DELETE_ENTRY';
+export const REARRANGE_ENTRY = 'REARRANGE_ENTRY';
 
 export interface EntryAddAction {
   type: typeof ADD_ENTRY
@@ -17,7 +18,13 @@ export interface EntryDeleteAction {
   id: number
 }
 
-export type EntriesActionTypes = EntryAddAction | EntryUpdateAction | EntryDeleteAction;
+export interface EntryRearrangeAction {
+  type: typeof REARRANGE_ENTRY
+  id: number
+  index: number
+}
+
+export type EntriesActionTypes = EntryAddAction | EntryUpdateAction | EntryDeleteAction | EntryRearrangeAction;
 
 export interface EntryType {
   id: number

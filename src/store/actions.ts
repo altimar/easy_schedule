@@ -1,4 +1,8 @@
-import { ADD_ENTRY, UPDATE_ENTRY, DELETE_ENTRY, EntryType, EntryAddAction, EntryUpdateAction, EntryDeleteAction } from './types';
+import {
+  ADD_ENTRY, UPDATE_ENTRY, DELETE_ENTRY, REARRANGE_ENTRY,
+  EntryAddAction, EntryUpdateAction, EntryDeleteAction, EntryRearrangeAction,
+  EntryType,
+} from './types';
 
 export function addEntryAction(entry: EntryType): EntryAddAction {
   return {
@@ -18,5 +22,13 @@ export function deleteEntryAction(entry: EntryType): EntryDeleteAction {
   return {
     type: DELETE_ENTRY,
     id: entry.id,
+  }
+}
+
+export function rearrangeEntryAction(id: number, index: number): EntryRearrangeAction {
+  return {
+    type: REARRANGE_ENTRY,
+    id: id,
+    index: index,
   }
 }
