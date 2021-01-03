@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/easy_schedule/static/css/main.905708ad.chunk.css",
-    "main.js": "/easy_schedule/static/js/main.6a5e2c86.chunk.js",
-    "main.js.map": "/easy_schedule/static/js/main.6a5e2c86.chunk.js.map",
+    "main.css": "/easy_schedule/static/css/main.212d7212.chunk.css",
+    "main.js": "/easy_schedule/static/js/main.88afe631.chunk.js",
+    "main.js.map": "/easy_schedule/static/js/main.88afe631.chunk.js.map",
     "runtime-main.js": "/easy_schedule/static/js/runtime-main.8160c86f.js",
     "runtime-main.js.map": "/easy_schedule/static/js/runtime-main.8160c86f.js.map",
-    "static/js/2.f7848a22.chunk.js": "/easy_schedule/static/js/2.f7848a22.chunk.js",
-    "static/js/2.f7848a22.chunk.js.map": "/easy_schedule/static/js/2.f7848a22.chunk.js.map",
+    "static/js/2.3d5c3ab7.chunk.js": "/easy_schedule/static/js/2.3d5c3ab7.chunk.js",
+    "static/js/2.3d5c3ab7.chunk.js.map": "/easy_schedule/static/js/2.3d5c3ab7.chunk.js.map",
     "index.html": "/easy_schedule/index.html",
-    "static/css/main.905708ad.chunk.css.map": "/easy_schedule/static/css/main.905708ad.chunk.css.map",
-    "static/js/2.f7848a22.chunk.js.LICENSE.txt": "/easy_schedule/static/js/2.f7848a22.chunk.js.LICENSE.txt",
+    "static/css/main.212d7212.chunk.css.map": "/easy_schedule/static/css/main.212d7212.chunk.css.map",
+    "static/js/2.3d5c3ab7.chunk.js.LICENSE.txt": "/easy_schedule/static/js/2.3d5c3ab7.chunk.js.LICENSE.txt",
     "static/media/EntryModal.css": "/easy_schedule/static/media/close.788d7440.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.8160c86f.js",
-    "static/js/2.f7848a22.chunk.js",
-    "static/css/main.905708ad.chunk.css",
-    "static/js/main.6a5e2c86.chunk.js"
+    "static/js/2.3d5c3ab7.chunk.js",
+    "static/css/main.212d7212.chunk.css",
+    "static/js/main.88afe631.chunk.js"
   ]
 }
