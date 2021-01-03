@@ -2,16 +2,24 @@ import React, { Component } from 'react';
 import './App.css';
 import EntryList from './components/EntryList';
 import EntryModal from './components/EntryModal';
-import { connect } from 'react-redux';
+import { connect, ConnectedProps } from 'react-redux';
 import { RootState, EntryListType, EntryType } from './store/types'
+import { addEntryAction, updateEntryAction, deleteEntryAction } from './store/actions'
+import Button from './components/Button'
 
-const mapStateToProps = (state: RootState) => ({
+const mapState = (state: RootState) => ({
   schedule: state.schedule,
 });
 
-type Props = {
-  schedule: EntryListType
+const mapDispatch = {
+  addEntry: addEntryAction,
+  updateEntry: updateEntryAction,
+  deleteEntry: deleteEntryAction,
 }
+
+const connector = connect(mapState, mapDispatch)
+
+type Props = ConnectedProps<typeof connector>
 
 interface IState {
   is_modal: boolean;
@@ -33,10 +41,16 @@ class App extends Component<Props, IState> {
     super(props);
 
     this.state = {
-      is_modal: false,
+      is_modal: true,
       schedule: { ...this.props.schedule },
       edited_entry: getEmptyEntry()
     };
+  }
+
+  componentWillReceiveProps(newProps: Props): void {
+    this.setState({
+      schedule: { ...newProps.schedule },
+    });
   }
 
   onEntrySelect = (id: number) => {
@@ -55,7 +69,26 @@ class App extends Component<Props, IState> {
   }
 
   onModalSave = (entry: EntryType) => {
+    if (entry.title.length > 0) {
+      this.setState({ is_modal: false });
+      if (entry.id === 0) {
+        this.props.addEntry(entry);
+      } else {
+        this.props.updateEntry(entry);
+      }
+    }
+  }
 
+  onModalDelete = (entry: EntryType) => {
+    this.setState({ is_modal: false });
+    this.props.deleteEntry(entry);
+  }
+
+  onAddButtonClick = () => {
+    this.setState({
+      is_modal: true,
+      edited_entry: getEmptyEntry(),
+    });
   }
 
   render() {
@@ -64,6 +97,7 @@ class App extends Component<Props, IState> {
         <header className="App-header">
           <h1>Easy Schedule</h1>
         </header>
+        <Button type="ok" size="big" onClick={this.onAddButtonClick}>Add entry</Button>
         <EntryList entries={this.state.schedule.entries} onSelect={this.onEntrySelect} />
         {
           this.state.is_modal &&
@@ -71,6 +105,7 @@ class App extends Component<Props, IState> {
             entry={this.state.edited_entry}
             onCancel={this.onModalCancel}
             onSave={this.onModalSave}
+            onDelete={this.onModalDelete}
           />
         }
       </div>
@@ -78,6 +113,4 @@ class App extends Component<Props, IState> {
   }
 }
 
-export default connect(
-  mapStateToProps
-)(App);
+export default connector(App);
