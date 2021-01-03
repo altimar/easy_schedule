@@ -2,20 +2,17 @@ export const ADD_ENTRY = 'ADD_ENTRY';
 export const UPDATE_ENTRY = 'UPDATE_ENTRY';
 export const DELETE_ENTRY = 'DELETE_ENTRY';
 
-interface EntryAddAction {
+export interface EntryAddAction {
   type: typeof ADD_ENTRY
-  title: string
-  participants: string[]
+  entry: EntryType
 }
 
-interface EntryUpdateAction {
+export interface EntryUpdateAction {
   type: typeof UPDATE_ENTRY
-  id: number
-  title: string
-  participants: string[]
+  entry: EntryType
 }
 
-interface EntryDeleteAction {
+export interface EntryDeleteAction {
   type: typeof DELETE_ENTRY
   id: number
 }

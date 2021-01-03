@@ -2,13 +2,13 @@ import React, { Component, ChangeEvent } from 'react';
 import './EntryModal.css';
 import { EntryType } from '../store/types';
 import ListInput from './ListInput';
-import { isConstructorDeclaration } from 'typescript';
-import { Console } from 'console';
+import Button from './Button';
 
 type EntryModalProps = {
   entry?: EntryType,
   onCancel?: () => void,
   onSave?: (entry: EntryType) => void,
+  onDelete?: (entry: EntryType) => void,
 }
 
 export default class EntryModal extends Component<EntryModalProps, EntryType> {
@@ -29,12 +29,20 @@ export default class EntryModal extends Component<EntryModalProps, EntryType> {
     this.props.onCancel && this.props.onCancel();
   }
 
+  onSaveClick = () => {
+    this.props.onSave && this.props.onSave(this.state);
+  }
+
+  onDeleteClick = () => {
+    this.props.onDelete && this.props.onDelete(this.state);
+  }
+
   render() {
     return (
       <div className="EntryModal">
         <div className="EntryModal-title">
           {
-            this.state.id == 0 ? 'Добавить элемент' : 'Редактировать элемент'
+            this.state.id === 0 ? 'Добавить элемент' : 'Редактировать элемент'
           }
           <button className="EntryModal-close" onClick={this.onCloseClick}/>
         </div>
@@ -45,6 +53,13 @@ export default class EntryModal extends Component<EntryModalProps, EntryType> {
           <div className="EntryModal-row">
             <label>Участники: </label><ListInput values={this.state.participants} onChange={this.onParticipantsChange}/>
           </div>
+        </div>
+        <div className="EntryModal-footer">
+          <Button onClick={this.onSaveClick} type="ok">Save</Button>
+          <Button onClick={this.props.onCancel} type="cancel">Close</Button>
+          {
+            this.state.id !== 0 && <Button onClick={this.onDeleteClick} type="delete">Delete</Button>
+          }
         </div>
       </div>
     )

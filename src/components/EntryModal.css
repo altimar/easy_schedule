@@ -6,33 +6,15 @@
   box-shadow: 1px 1px 5px 2px rgba(0,0,0,0.5);
   background: #fff;
   border-radius: 5px;
-  padding: 10px;
 }
 
 .EntryModal-title {
-  padding-bottom: 10px;
-  padding-right: 30px;
+  padding: 10px 30px 10px 10px;
   font-size: calc(14px + 2vmin);
 }
 
-.EntryModal-participant-list {
-  display: flex;
-  flex-wrap: wrap;
-  padding-top: 5px;
-  box-sizing: border-box;
-  border: 1px black solid;
-}
-
-.EntryModal-participant-list .Label {
-  margin: 0 5px 5px 0;
-}
-
-.EntryModal-participant-list input {
-  min-width: 25%;
-  flex: 1;
-  border: none;
-  background: transparent;
-  outline: none;
+.EntryModal-body {
+  padding: 10px;
 }
 
 .EntryModal-close {
@@ -44,4 +26,11 @@
   border: transparent;
   height:30px;
   margin-left: 5px;
+}
+
+.EntryModal-footer {
+  border-top: 1px solid #ccc;
+  padding:10px;
+  display: block;
+  text-align: right;
 }
