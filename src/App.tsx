@@ -5,7 +5,8 @@ import EntryModal from './components/EntryModal';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState, EntryListType, EntryType } from './store/types'
 import { addEntryAction, updateEntryAction, deleteEntryAction, rearrangeEntryAction } from './store/actions'
-import Button from './components/Button'
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 const mapState = (state: RootState) => ({
   schedule: state.schedule,
@@ -95,24 +96,23 @@ class App extends Component<Props, IState> {
   render() {
     return (
       <div className="App">
+        <CssBaseline />
         <header className="App-header">
           <h1>Easy Schedule</h1>
         </header>
-        <Button type="ok" size="big" onClick={this.onAddButtonClick}>Add entry</Button>
+        <Button variant="contained" color="primary" onClick={this.onAddButtonClick}>Add entry</Button>
         <EntryList
-        entries={this.state.schedule.entries}
-        onSelect={this.onEntrySelect}
-        onRearrange={this.props.rearrangeEntry}
+          entries={this.state.schedule.entries}
+          onSelect={this.onEntrySelect}
+          onRearrange={this.props.rearrangeEntry}
         />
-        {
-          this.state.is_modal &&
-          <EntryModal key={this.state.edited_entry.id}
-            entry={this.state.edited_entry}
-            onCancel={this.onModalCancel}
-            onSave={this.onModalSave}
-            onDelete={this.onModalDelete}
-          />
-        }
+        <EntryModal key={this.state.edited_entry.id}
+          open={this.state.is_modal}
+          entry={this.state.edited_entry}
+          onCancel={this.onModalCancel}
+          onSave={this.onModalSave}
+          onDelete={this.onModalDelete}
+        />
       </div>
     );
   }

@@ -1,67 +1,90 @@
-import React, { Component, ChangeEvent } from 'react';
+import React, { FunctionComponent, useState, ChangeEvent } from 'react';
 import './EntryModal.css';
 import { EntryType } from '../store/types';
-import ListInput from './ListInput';
-import Button from './Button';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import TextField from '@material-ui/core/TextField';
+import ChipInput from 'material-ui-chip-input';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { useTheme } from '@material-ui/core/styles';
 
 type EntryModalProps = {
+  open: boolean,
   entry?: EntryType,
   onCancel?: () => void,
   onSave?: (entry: EntryType) => void,
   onDelete?: (entry: EntryType) => void,
 }
 
-export default class EntryModal extends Component<EntryModalProps, EntryType> {
-  constructor(props: EntryModalProps) {
-    super(props)
-    this.state = this.props.entry ? Object.assign({}, this.props.entry) : { id: 0, title: '', participants: [] };
+export default function EntryModal(props: EntryModalProps) {
+  const initialState = props.entry ? Object.assign({}, props.entry) : { id: 0, title: '', participants: [] };
+  const [state, setState] = useState(initialState);
+
+  let onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    setState({ ...state, title: event.target.value });
   }
 
-  onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-    this.setState({ title: event.target.value });
+  let onParticipantsChange = (values: string[]) => {
+    setState({ ...state, participants: values });
   }
 
-  onParticipantsChange = (values: string[]) => {
-    this.setState({ participants: values });
+  let onSaveClick = () => {
+    props.onSave && props.onSave(state);
   }
 
-  onCloseClick = () => {
-    this.props.onCancel && this.props.onCancel();
+  let onDeleteClick = () => {
+    props.onDelete && props.onDelete(state);
   }
 
-  onSaveClick = () => {
-    this.props.onSave && this.props.onSave(this.state);
-  }
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
-  onDeleteClick = () => {
-    this.props.onDelete && this.props.onDelete(this.state);
-  }
-
-  render() {
-    return (
-      <div className="EntryModal">
-        <div className="EntryModal-title">
-          {
-            this.state.id === 0 ? 'Добавить элемент' : 'Редактировать элемент'
-          }
-          <button className="EntryModal-close" onClick={this.onCloseClick}/>
-        </div>
-        <div className="EntryModal-body">
-          <div className="EntryModal-row">
-            <label>Название: </label><input type="text" value={this.state.title} onChange={this.onTitleChangeHandler} />
-          </div>
-          <div className="EntryModal-row">
-            <label>Участники: </label><ListInput values={this.state.participants} onChange={this.onParticipantsChange}/>
-          </div>
-        </div>
-        <div className="EntryModal-footer">
-          <Button onClick={this.onSaveClick} type="ok">Save</Button>
-          <Button onClick={this.props.onCancel} type="cancel">Close</Button>
-          {
-            this.state.id !== 0 && <Button onClick={this.onDeleteClick} type="delete">Delete</Button>
-          }
-        </div>
-      </div>
-    )
-  }
+  return (
+    <Dialog
+      open={props.open}
+      fullScreen={fullScreen}
+      onClose={props.onCancel}
+    >
+      <DialogTitle>
+        {
+          state.id === 0 ? 'Добавить элемент' : 'Редактировать элемент'
+        }
+      </DialogTitle>
+      <DialogContent>
+        <TextField
+          margin="dense"
+          label="Название:"
+          type="text"
+          fullWidth
+          value={state.title}
+          onChange={onTitleChangeHandler}
+        />
+        <ChipInput
+          label="Участники:"
+          variant="outlined"
+          margin="dense"
+          fullWidth
+          defaultValue={state.participants}
+          onChange={onParticipantsChange}
+        />
+      </DialogContent>
+      <DialogActions>
+        {
+          state.id !== 0 &&
+          <Button onClick={onDeleteClick} color="secondary">
+            Delete
+          </Button>
+        }
+        <Button onClick={props.onCancel}>
+          Close
+        </Button>
+        <Button onClick={onSaveClick}>
+          Save
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
 }
