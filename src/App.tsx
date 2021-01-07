@@ -96,7 +96,6 @@ class App extends Component<Props, IState> {
   render() {
     return (
       <div className="App">
-        <CssBaseline />
         <header className="App-header">
           <h1>Easy Schedule</h1>
         </header>
@@ -113,6 +112,7 @@ class App extends Component<Props, IState> {
           onSave={this.onModalSave}
           onDelete={this.onModalDelete}
         />
+        <CssBaseline />
       </div>
     );
   }
