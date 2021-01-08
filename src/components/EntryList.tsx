@@ -10,9 +10,27 @@ interface IProps {
   onRearrange?: (id: number, index: number) => void
 }
 
-export default function EntryList(props:IProps) {
+function BadParticipantsForEntries(entries: EntryType[]): string[][] {
+  let prevEntry: EntryType | undefined = undefined;
+  let result: string[][] = [];
+  entries.forEach((entry: EntryType) => {
+    result.push([]);
+    if (prevEntry) {
+      entry.participants.forEach((participant) => {
+        if (prevEntry && prevEntry.participants.indexOf(participant) !== -1) {
+          result[result.length - 1].push(participant);
+          result[result.length - 2].push(participant);
+        }
+      })
+    }
+    prevEntry = entry;
+  });
+  return result;
+}
+
+export default function EntryList(props: IProps) {
   function onDragEnd(result: DropResult) {
-    const {destination, source, draggableId} = result; 
+    const { destination, source, draggableId } = result;
     if (!destination || !props.onRearrange) {
       return;
     }
@@ -23,6 +41,8 @@ export default function EntryList(props:IProps) {
 
     props.onRearrange(+draggableId, destination.index)
   }
+
+  const bad_participants = BadParticipantsForEntries(props.entries);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -37,10 +57,11 @@ export default function EntryList(props:IProps) {
               props.entries && props.entries.map((entry, index) => {
                 return <Entry
                   entry_id={entry.id}
-                  index = {index}
+                  index={index}
                   title={entry.title}
                   key={"entry_" + entry.title}
                   participants={entry.participants}
+                  bad_participants={bad_participants[index]}
                   onClick={() => props.onSelect && props.onSelect(entry.id)}
                 />;
               })
