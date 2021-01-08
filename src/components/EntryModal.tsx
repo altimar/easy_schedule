@@ -1,5 +1,4 @@
-import React, { FunctionComponent, useState, ChangeEvent } from 'react';
-import './EntryModal.css';
+import React, { useState, ChangeEvent } from 'react';
 import { EntryType } from '../store/types';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -23,19 +22,19 @@ export default function EntryModal(props: EntryModalProps) {
   const initialState = props.entry ? Object.assign({}, props.entry) : { id: 0, title: '', participants: [] };
   const [state, setState] = useState(initialState);
 
-  let onTitleChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+  function onTitleChangeHandler(event: ChangeEvent<HTMLInputElement>) {
     setState({ ...state, title: event.target.value });
   }
 
-  let onParticipantsChange = (values: string[]) => {
+  function onParticipantsChange(values: string[]) {
     setState({ ...state, participants: values });
   }
 
-  let onSaveClick = () => {
+  function onSaveClick() {
     props.onSave && props.onSave(state);
   }
 
-  let onDeleteClick = () => {
+  function onDeleteClick() {
     props.onDelete && props.onDelete(state);
   }
 

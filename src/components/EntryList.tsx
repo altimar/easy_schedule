@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './EntryList.css';
 import Entry from './Entry'
 import { EntryType } from '../store/types'
@@ -10,10 +10,10 @@ interface IProps {
   onRearrange?: (id: number, index: number) => void
 }
 
-export default class EntryList extends Component<IProps> {
-  onDragEnd = (result: DropResult) => {
+export default function EntryList(props:IProps) {
+  function onDragEnd(result: DropResult) {
     const {destination, source, draggableId} = result; 
-    if (!destination || !this.props.onRearrange) {
+    if (!destination || !props.onRearrange) {
       return;
     }
 
@@ -21,35 +21,34 @@ export default class EntryList extends Component<IProps> {
       return;
     }
 
-    this.props.onRearrange(+draggableId, destination.index)
+    props.onRearrange(+draggableId, destination.index)
   }
-  render() {
-    return (
-      <DragDropContext onDragEnd={this.onDragEnd}>
-        <Droppable droppableId="1">
-          {provided => (
-            <div
-              className="EntryList"
-              ref={provided.innerRef}
-              {...provided.droppableProps}
-            >
-              {
-                this.props.entries && this.props.entries.map((entry, index) => {
-                  return <Entry
-                    entry_id={entry.id}
-                    index = {index}
-                    title={entry.title}
-                    key={"entry_" + entry.title}
-                    participants={entry.participants}
-                    onClick={() => this.props.onSelect && this.props.onSelect(entry.id)}
-                  />;
-                })
-              }
-              {provided.placeholder}
-            </div>
-          )}
-        </Droppable>
-      </DragDropContext>
-    )
-  }
+
+  return (
+    <DragDropContext onDragEnd={onDragEnd}>
+      <Droppable droppableId="1">
+        {provided => (
+          <div
+            className="EntryList"
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+          >
+            {
+              props.entries && props.entries.map((entry, index) => {
+                return <Entry
+                  entry_id={entry.id}
+                  index = {index}
+                  title={entry.title}
+                  key={"entry_" + entry.title}
+                  participants={entry.participants}
+                  onClick={() => props.onSelect && props.onSelect(entry.id)}
+                />;
+              })
+            }
+            {provided.placeholder}
+          </div>
+        )}
+      </Droppable>
+    </DragDropContext>
+  )
 }

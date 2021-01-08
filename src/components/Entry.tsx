@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './Entry.css';
 import { Draggable } from 'react-beautiful-dnd'
 import Chip from '@material-ui/core/Chip'
@@ -13,22 +13,17 @@ interface IProps {
   onClick?: () => void,
 }
 
-export default class Entry extends Component<IProps> {
-  constructor(props: IProps) {
-    super(props)
-  }
-
-  render() {
+export default function Entry(props:IProps) {
     return (
-      <Draggable draggableId={this.props.entry_id.toString()} index={this.props.index}>
+      <Draggable draggableId={props.entry_id.toString()} index={props.index}>
         {(provided) => (
-          <Card className="Entry" onClick={this.props.onClick} {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
+          <Card className="Entry" onClick={props.onClick} {...provided.draggableProps} {...provided.dragHandleProps} ref={provided.innerRef}>
             <CardContent>
-              <div className="Entry-title">{this.props.title}</div>
+              <div className="Entry-title">{props.title}</div>
               <div className="Entry-participant-list">
                 {
-                  this.props.participants && this.props.participants.map(participant => {
-                    return <Chip label={participant} color="primary" />;
+                  props.participants && props.participants.map(participant => {
+                    return <Chip label={participant} color="primary" key={participant} />;
                   })
                 }
               </div>
@@ -37,5 +32,4 @@ export default class Entry extends Component<IProps> {
         )}
       </Draggable>
     )
-  }
 }
