@@ -1,7 +1,7 @@
 import {
-  ADD_ENTRY, UPDATE_ENTRY, DELETE_ENTRY, REARRANGE_ENTRY,
-  EntryAddAction, EntryUpdateAction, EntryDeleteAction, EntryRearrangeAction,
-  EntryType,
+  ADD_ENTRY, UPDATE_ENTRY, DELETE_ENTRY, REARRANGE_ENTRY, NEW_PROJECT,
+  EntryAddAction, EntryUpdateAction, EntryDeleteAction, EntryRearrangeAction, NewProjectEntryAction,
+  EntryType, ProjectType
 } from './types';
 
 export function addEntryAction(entry: EntryType): EntryAddAction {
@@ -30,5 +30,12 @@ export function rearrangeEntryAction(id: number, index: number): EntryRearrangeA
     type: REARRANGE_ENTRY,
     id: id,
     index: index,
+  }
+}
+
+export function newProjectAction(project_type: ProjectType): NewProjectEntryAction {
+  return {
+    type: NEW_PROJECT,
+    project_type: project_type,
   }
 }

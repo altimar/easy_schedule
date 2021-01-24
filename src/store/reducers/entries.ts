@@ -6,33 +6,57 @@ import {
   UPDATE_ENTRY,
   DELETE_ENTRY,
   REARRANGE_ENTRY,
+  ProjectType,
+  DEMO_PROJECT_TYPE,
+  EMPTY_PROJECT_TYPE,
+  NEW_PROJECT,
 } from '../types';
 
+import data_generator from '../demo';
+
 const initialState: EntryListType = {
+  title: '',
   entries: [],
+}
+
+let project_counter: number = 1;
+
+function newProject(project_type: ProjectType, project_counter: number): EntryListType {
+  switch (project_type) {
+    case DEMO_PROJECT_TYPE:
+      return { ...data_generator(5, 2, 6), title: 'Demo schedule ' + project_counter.toString() };
+    case EMPTY_PROJECT_TYPE:
+    default:
+      return {
+        title: 'New schedule ' + project_counter.toString(),
+        entries: [],
+      };
+  }
 }
 
 export function entries(state = initialState, action: EntriesActionTypes) {
   switch (action.type) {
+    case NEW_PROJECT:
+      return newProject(action.project_type, project_counter++);
     case ADD_ENTRY:
       return {
         entries: [...state.entries, action.entry]
       }
     case UPDATE_ENTRY:
-      let newState = {...state};
-      for(let i = 0; i < newState.entries.length; i++) {
+      let newState = { ...state };
+      for (let i = 0; i < newState.entries.length; i++) {
         if (newState.entries[i].id === action.entry.id) {
-          newState.entries[i] = {...action.entry}
+          newState.entries[i] = { ...action.entry }
         }
       }
       return newState;
     case DELETE_ENTRY:
-      state.entries = state.entries.filter((value) => value.id !== action.id );
-      return {...state};
+      state.entries = state.entries.filter((value) => value.id !== action.id);
+      return { ...state };
     case REARRANGE_ENTRY:
       let currentIndex = -1;
       let currentEntry: EntryType;
-      for(let i = 0; i < state.entries.length; i++) {
+      for (let i = 0; i < state.entries.length; i++) {
         if (state.entries[i].id === action.id) {
           currentIndex = i;
           break;
@@ -44,7 +68,7 @@ export function entries(state = initialState, action: EntriesActionTypes) {
 
       [currentEntry] = state.entries.splice(currentIndex, 1);
       state.entries.splice(action.index, 0, currentEntry);
-      return {...state};
+      return { ...state };
     default:
       return state
   }
