@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import EntryList from './components/EntryList';
 import EntryModal from './components/EntryModal';
+import NewProject from './components/NewProject';
+import { Modal } from './components/Modal';
 import { connect, ConnectedProps } from 'react-redux';
-import { RootState, EntryType } from './store/types'
-import { addEntryAction, updateEntryAction, deleteEntryAction, rearrangeEntryAction } from './store/actions'
+import { RootState, EntryType, ProjectType, MODAL_EDIT_NAME, MODAL_NEW_PROJECT_NAME, MODAL_VOID_NAME } from './store/types'
+import { addEntryAction, updateEntryAction, deleteEntryAction, rearrangeEntryAction, newProjectAction } from './store/actions'
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
@@ -17,6 +19,7 @@ const mapDispatch = {
   updateEntry: updateEntryAction,
   deleteEntry: deleteEntryAction,
   rearrangeEntry: rearrangeEntryAction,
+  newProject: newProjectAction,
 }
 
 const connector = connect(mapState, mapDispatch)
@@ -33,17 +36,25 @@ function getEmptyEntry(): EntryType {
 
 function App(props: Props) {
   const [state, setState] = useState({
-    is_modal: false,
+    modal: MODAL_VOID_NAME,
     schedule: { ...props.schedule },
-    edited_entry: getEmptyEntry()
+    edited_entry: getEmptyEntry(),
   });
+
+  useEffect(() => {
+    setState({
+      ...state,
+      schedule: { ...props.schedule },
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props])
 
   function onEntrySelect(id: number) {
     for (let i = 0; i < state.schedule.entries.length; i++) {
       if (state.schedule.entries[i].id === id) {
         setState({
           ...state,
-          is_modal: true,
+          modal: MODAL_EDIT_NAME,
           edited_entry: { ...state.schedule.entries[i] },
         })
       }
@@ -51,14 +62,14 @@ function App(props: Props) {
   }
 
   function onModalCancel() {
-    setState({ ...state, is_modal: false });
+    setState({ ...state, modal: MODAL_VOID_NAME });
   }
 
   function onModalSave(entry: EntryType) {
     if (entry.title.length > 0) {
       setState({
         ...state,
-        is_modal: false
+        modal: MODAL_VOID_NAME,
       });
       if (entry.id === 0) {
         props.addEntry(entry);
@@ -71,7 +82,7 @@ function App(props: Props) {
   function onModalDelete(entry: EntryType) {
     setState({
       ...state,
-      is_modal: false
+      modal: MODAL_VOID_NAME
     });
     props.deleteEntry(entry);
   }
@@ -79,29 +90,59 @@ function App(props: Props) {
   function onAddButtonClick() {
     setState({
       ...state,
-      is_modal: true,
+      modal: MODAL_EDIT_NAME,
       edited_entry: getEmptyEntry(),
     });
   }
 
+  function onNewProjectButtonClick() {
+    setState({
+      ...state,
+      modal: MODAL_NEW_PROJECT_NAME,
+    });
+  }
+
+  function onNewProject(project_type: ProjectType) {
+    setState({
+      ...state,
+      modal: MODAL_VOID_NAME
+    });
+    props.newProject(project_type);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>Easy Schedule</h1>
-      </header>
-      <Button variant="contained" color="primary" onClick={onAddButtonClick}>Add entry</Button>
-      <EntryList
-        entries={state.schedule.entries}
-        onSelect={onEntrySelect}
-        onRearrange={props.rearrangeEntry}
-      />
-      <EntryModal key={state.edited_entry.id}
-        open={state.is_modal}
-        entry={state.edited_entry}
-        onCancel={onModalCancel}
-        onSave={onModalSave}
-        onDelete={onModalDelete}
-      />
+      {
+        state.schedule.title === "" ?
+          <NewProject onOk={onNewProject} />
+          :
+          <>
+            <header className="App-header">
+              <h1>{state.schedule.title}</h1>
+            </header>
+            <Button variant="contained" color="primary" onClick={onAddButtonClick}>Add entry</Button>
+            <EntryList
+              entries={state.schedule.entries}
+              onSelect={onEntrySelect}
+              onRearrange={props.rearrangeEntry}
+            />
+            <Button variant="contained" color="secondary" onClick={onNewProjectButtonClick}>New project</Button>
+            <EntryModal key={state.edited_entry.id}
+              open={state.modal === MODAL_EDIT_NAME}
+              entry={state.edited_entry}
+              onCancel={onModalCancel}
+              onSave={onModalSave}
+              onDelete={onModalDelete}
+            />
+            <Modal
+              open={state.modal === MODAL_NEW_PROJECT_NAME}
+              onCancel={onModalCancel}
+              title='New Schedule'
+            >
+              <NewProject onOk={onNewProject} />
+            </Modal>
+          </>
+      }
       <CssBaseline />
     </div>
   );

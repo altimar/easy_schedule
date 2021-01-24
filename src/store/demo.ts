@@ -1,4 +1,4 @@
-import { EntryListType, EntryType, RootState } from './types'
+import { EntryListType, EntryType } from './types'
 
 const female_first_names = [
   'Abigail',
@@ -346,16 +346,15 @@ function getRandomScheduleEntry(id: number, title: string, min_participant: numb
   return entry;
 }
 
-export default function generate(entries_count: number, min_participant: number, max_participant: number): RootState {
-  return {
-    schedule: ((): EntryListType => {
-      let schedule: EntryListType = {
-        entries: [],
-      };
-      for (let i = 0; i < entries_count; i++) {
-        schedule.entries.push(getRandomScheduleEntry(i+1, 'Dance ' + (i + 1).toString(), min_participant, max_participant));
-      }
-      return schedule;
-    })(),
-  };
+export default function generate(entries_count: number, min_participant: number, max_participant: number): EntryListType {
+  return ((): EntryListType => {
+    let schedule: EntryListType = {
+      title: '',
+      entries: [],
+    };
+    for (let i = 0; i < entries_count; i++) {
+      schedule.entries.push(getRandomScheduleEntry(i + 1, 'Dance ' + (i + 1).toString(), min_participant, max_participant));
+    }
+    return schedule;
+  })();
 }
