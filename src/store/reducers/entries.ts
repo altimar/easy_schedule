@@ -39,6 +39,14 @@ export function entries(state = initialState, action: EntriesActionTypes) {
     case NEW_PROJECT:
       return newProject(action.project_type, project_counter++);
     case ADD_ENTRY:
+      let id = 0;
+      state.entries.forEach((entry) => {
+        if (entry.id > id) {
+          id = entry.id
+        }
+      })
+      action.entry.id = id + 1
+      console.log(action.entry.id);
       return {
         entries: [...state.entries, action.entry]
       }

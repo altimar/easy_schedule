@@ -32,6 +32,7 @@ export default function EntryModal(props: EntryModalProps) {
 
   function onSaveClick() {
     props.onSave && props.onSave(state);
+    setState({...state, id: 0, title: '', participants: []});
   }
 
   function onDeleteClick() {
