@@ -1,13 +1,14 @@
 .Entry {
   margin: 5px 0px;
   width: 100%;
+  min-width: 200px;
   cursor: pointer;
 }
 
 .Entry-title {
   text-align: left;
   font-weight: bold;
-  font-size: calc(10px + 2vmin);
+  font-size: 16px;
 }
 
 .Entry-participant-list {
@@ -19,4 +20,13 @@
 
 .Entry-participant-list > * {
   margin: 0 5px 5px 0;
+}
+
+.Entry .Entry-expand {
+  margin-left: auto;
+  transform: rotate(0deg);
+  transition: transform 250ms;
+}
+.Entry .Entry-expandOpen {
+  transform: rotate(180deg);
 }

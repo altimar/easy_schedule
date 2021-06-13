@@ -6,7 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import TextField from '@material-ui/core/TextField';
-import ChipInput from 'material-ui-chip-input';
+import ChipInput from './ChipInput';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useTheme } from '@material-ui/core/styles';
 
@@ -19,7 +19,7 @@ type EntryModalProps = {
 }
 
 export default function EntryModal(props: EntryModalProps) {
-  const initialState = props.entry ? Object.assign({}, props.entry) : { id: 0, title: '', participants: [] };
+  const initialState = props.entry ? Object.assign({}, props.entry) : { id: 0, title: '', participants: [], expanded: true };
   const [state, setState] = useState(initialState);
 
   function onTitleChangeHandler(event: ChangeEvent<HTMLInputElement>) {
