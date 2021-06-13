@@ -10,6 +10,7 @@ import {
   DEMO_PROJECT_TYPE,
   EMPTY_PROJECT_TYPE,
   NEW_PROJECT,
+  COLLAPSE_EXPAND_ENTRY,
 } from '../types';
 
 import data_generator from '../demo';
@@ -36,6 +37,14 @@ function newProject(project_type: ProjectType, project_counter: number): EntryLi
 
 export function entries(state = initialState, action: EntriesActionTypes) {
   switch (action.type) {
+    case COLLAPSE_EXPAND_ENTRY:
+      state.entries = state.entries.map((value) => {
+        if (value.id === action.entry.id) {
+          value.expanded = !value.expanded
+        }
+        return value
+      });
+      return {...state};
     case NEW_PROJECT:
       return newProject(action.project_type, project_counter++);
     case ADD_ENTRY:

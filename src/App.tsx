@@ -6,9 +6,13 @@ import NewProject from './components/NewProject';
 import { Modal } from './components/Modal';
 import { connect, ConnectedProps } from 'react-redux';
 import { RootState, EntryType, ProjectType, MODAL_EDIT_NAME, MODAL_NEW_PROJECT_NAME, MODAL_VOID_NAME } from './store/types'
-import { addEntryAction, updateEntryAction, deleteEntryAction, rearrangeEntryAction, newProjectAction } from './store/actions'
+import { collapseExpandEntryAction, addEntryAction, updateEntryAction, deleteEntryAction, rearrangeEntryAction, newProjectAction } from './store/actions'
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import { createTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+
+const theme = createTheme();
 
 const mapState = (state: RootState) => ({
   schedule: state.schedule,
@@ -20,6 +24,7 @@ const mapDispatch = {
   deleteEntry: deleteEntryAction,
   rearrangeEntry: rearrangeEntryAction,
   newProject: newProjectAction,
+  collapseExpandEntry: collapseExpandEntryAction,
 }
 
 const connector = connect(mapState, mapDispatch)
@@ -31,6 +36,7 @@ function getEmptyEntry(): EntryType {
     id: 0,
     title: '',
     participants: [],
+    expanded: true,
   }
 }
 
@@ -111,6 +117,7 @@ function App(props: Props) {
   }
 
   return (
+    <ThemeProvider theme={theme}>
     <div className="App">
       {
         state.schedule.title === "" ?
@@ -125,6 +132,7 @@ function App(props: Props) {
               entries={state.schedule.entries}
               onSelect={onEntrySelect}
               onRearrange={props.rearrangeEntry}
+              onCollapseExpand={props.collapseExpandEntry}
             />
             <Button variant="contained" color="secondary" onClick={onNewProjectButtonClick}>New project</Button>
             <EntryModal key={state.edited_entry.id}
@@ -145,6 +153,7 @@ function App(props: Props) {
       }
       <CssBaseline />
     </div>
+    </ThemeProvider>
   );
 }
 

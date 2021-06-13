@@ -7,6 +7,7 @@ import { DragDropContext, DropResult, Droppable } from 'react-beautiful-dnd'
 interface IProps {
   entries: EntryType[],
   onSelect?: (id: number) => void,
+  onCollapseExpand?: (entry: EntryType) => void,
   onRearrange?: (id: number, index: number) => void
 }
 
@@ -62,7 +63,9 @@ export default function EntryList(props: IProps) {
                   key={"entry_" + entry.title}
                   participants={entry.participants}
                   bad_participants={bad_participants[index]}
+                  expanded={entry.expanded}
                   onClick={() => props.onSelect && props.onSelect(entry.id)}
+                  onCollapseExpand={() => props.onCollapseExpand && props.onCollapseExpand(entry)}
                 />;
               })
             }

@@ -1,8 +1,15 @@
 import {
-  ADD_ENTRY, UPDATE_ENTRY, DELETE_ENTRY, REARRANGE_ENTRY, NEW_PROJECT,
-  EntryAddAction, EntryUpdateAction, EntryDeleteAction, EntryRearrangeAction, NewProjectEntryAction,
+  ADD_ENTRY, UPDATE_ENTRY, DELETE_ENTRY, REARRANGE_ENTRY, NEW_PROJECT, COLLAPSE_EXPAND_ENTRY,
+  EntryCollapseExpandAction, EntryAddAction, EntryUpdateAction, EntryDeleteAction, EntryRearrangeAction, NewProjectEntryAction,
   EntryType, ProjectType
 } from './types';
+
+export function collapseExpandEntryAction(entry: EntryType): EntryCollapseExpandAction {
+  return {
+    type: COLLAPSE_EXPAND_ENTRY,
+    entry: entry,
+  }
+}
 
 export function addEntryAction(entry: EntryType): EntryAddAction {
   return {
