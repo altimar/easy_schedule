@@ -39,6 +39,17 @@ export default function EntryModal(props: EntryModalProps) {
     props.onDelete && props.onDelete(state);
   }
 
+  function onPaste(e:React.ClipboardEvent<HTMLInputElement>) {
+    let newParticipantsString = e.clipboardData.getData('Text').replaceAll(/\t/g, ' ').replaceAll(/\s{2,}/g, ' ');
+    let newParticipantsList = newParticipantsString.split(/\n/)
+    if (newParticipantsList.length > 1) {
+      setState({ ...state, participants: [...state.participants, ...newParticipantsList] });
+    } else {
+      (e.target as HTMLInputElement).value = newParticipantsString
+    }
+    e.preventDefault();
+  }
+
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
@@ -69,6 +80,7 @@ export default function EntryModal(props: EntryModalProps) {
           fullWidth
           defaultValue={state.participants}
           onChange={onParticipantsChange}
+          onPaste={onPaste}
         />
       </DialogContent>
       <DialogActions>
